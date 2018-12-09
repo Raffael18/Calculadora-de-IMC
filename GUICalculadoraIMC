@@ -1,0 +1,115 @@
+package calcularimc;
+
+import java.awt.Container;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+
+
+public class GUICalculadoraIMC extends JFrame{
+    Container janela = getContentPane();
+    JLabel labelPeso = new JLabel("Digite seu peso:");
+    JLabel labelAltura = new JLabel("Digite sua altura em metros:");
+    JLabel labelResultado = new JLabel("Seu IMC: ");
+    JTextField campoPeso = new JFormattedTextField();
+    JTextField campoAltura = new JFormattedTextField();
+    JTextArea campoResultado = new JTextArea();
+    JButton botao = new JButton("Calcular");
+    
+    public void montarTela() {
+        setLayout(null);
+        setTitle("IMC");
+        labelPeso.setBounds(10, 40, 100, 20);
+        labelAltura.setBounds(10, 80, 160, 50);
+        labelResultado.setBounds(10, 300, 100, 20);
+        campoPeso.setBounds(10, 60, 100, 20);
+        campoAltura.setBounds(10, 120, 100, 20);
+        campoResultado.setBounds(10, 320, 100, 20);
+        botao.setBounds(145, 200, 100, 20);
+        
+        janela.add(labelPeso);
+        janela.add(labelAltura);
+        janela.add(labelResultado);
+        janela.add(campoPeso);
+        janela.add(campoAltura);
+        janela.add(campoResultado);
+        janela.add(botao);
+     
+        botao.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                  CalcularIMC();
+            }
+        });
+
+        setSize(420, 500);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setVisible(true);
+        
+    }
+     public void CalcularIMC() {
+        double altura;
+        double peso;
+        double formula;
+        String msg = "";
+        String msg1 = "";
+        
+        try {
+        peso = Double.parseDouble(campoPeso.getText());
+        altura = Double.parseDouble(campoAltura.getText());
+        formula = peso / (altura * altura);
+        if(peso < 0 ) {
+            msg = "Número do peso ou da altura está negativo";
+        JOptionPane.showMessageDialog(getContentPane(), msg);
+        throw new Exception("Erro!");
+        }
+        if(altura < 0 ) {
+         msg = "Número do peso ou da altura está negativo";
+        JOptionPane.showMessageDialog(getContentPane(), msg);
+        throw new Exception("Erro!");
+        }
+        String resultado = String.format("%.2f", formula);
+        campoResultado.setText(resultado);
+        
+        
+        if (formula < 17) {
+            msg1 = "Seu IMC deu muito abaixo do peso";
+            JOptionPane.showMessageDialog(getContentPane(), msg1);
+        }
+        if (formula >= 17 && formula <= 18.49 ) {
+            msg1 = "Seu IMC deu abaixo do peso";
+            JOptionPane.showMessageDialog(getContentPane(), msg1);
+        }
+        if (formula >= 18.50 && formula <= 24.99 ) {
+            msg1 = "Seu IMC deu normal";
+            JOptionPane.showMessageDialog(getContentPane(), msg1);
+        }
+        if (formula >= 25 && formula <= 29.99 ) {
+            msg1 = "Seu IMC deu acima do peso";
+            JOptionPane.showMessageDialog(getContentPane(), msg1);
+        }
+        if (formula >= 30 && formula <= 34.99 ) {
+            msg1 = "Seu IMC deu Obesidade I";
+            JOptionPane.showMessageDialog(getContentPane(), msg1);
+        }
+        if (formula >= 35 && formula <= 39.99 ) {
+            msg1 = "Seu IMC deu Obesidade II(Severa)";
+            JOptionPane.showMessageDialog(getContentPane(), msg1);
+        }
+        if (formula > 40  ) {
+            msg1 = "Seu IMC deu Obesidade III(Mórbida)";
+            JOptionPane.showMessageDialog(getContentPane(), msg1);
+        }
+        
+        }catch ( Exception e ){
+             System.err.println( e.getMessage() );
+        }
+    }
+   
+}
