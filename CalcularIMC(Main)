@@ -1,0 +1,34 @@
+package calcularimc;
+
+import java.text.NumberFormat;
+
+import javax.swing.JFormattedTextField;
+import javax.swing.text.NumberFormatter;
+
+public class CalcularIMC {
+
+    
+    
+    public static void main(String[] args) {
+        GUICalculadoraIMC t1 = new GUICalculadoraIMC();
+        t1.montarTela();
+        
+        NumberFormat format = NumberFormat.getInstance();
+    NumberFormatter formatter = new NumberFormatter(format);
+    formatter.setValueClass(Integer.class);
+    formatter.setMinimum(0);
+    formatter.setMaximum(Integer.MAX_VALUE);
+    formatter.setAllowsInvalid(false);
+    // If you want the value to be committed on each keystroke instead of focus lost
+    formatter.setCommitsOnValidEdit(true);
+    JFormattedTextField field = new JFormattedTextField(formatter);
+
+    
+
+    // getValue() always returns something valid
+    System.out.println(field.getValue());
+
+        
+    }
+    
+}
