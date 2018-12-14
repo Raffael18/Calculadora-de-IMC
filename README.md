@@ -9,6 +9,7 @@ Calculadora de IMC simples feita em Java.
 A simple calculator of BMI made in Java.
 
 //PT-BR
+
 Peso em Kg.
 Altura em Metros. (Utilizar "." para separar os números).
 
